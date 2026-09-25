@@ -12,6 +12,7 @@ calculator/
 ├── memory.md
 ├── skills.md
 ├── README.md                      # setup, run, test, API usage
+├── LICENSE                        # MIT
 ├── docker-compose.yml             # optional, phase 4
 │
 ├── backend/                       # Go REST API
@@ -74,7 +75,7 @@ calculator/
 ```
 ┌───────────────────────┐        HTTP/JSON         ┌───────────────────────┐
 │   React (Vite)        │ ───────────────────────▶│   Go REST API          │
-│   :5173 (dev)         │                          │   8081:8080           │
+│   :5173 (dev)         │                          │   8080:8081           │
 │                       │◀─────────────────────── │                        │
 │  Calculator.tsx       │      200 / 4xx JSON      │  httpapi.Handler       │
 │    └─ calculatorClient│                          │    └─ calculator.*     │
