@@ -46,7 +46,7 @@ The system uses a decoupled, three-tier containerized architecture. The frontend
 ## Frontend
 Core: React 18, TypeScript, Vite
 
-HTTP Client: Native fetch API / Axios abstraction layer
+HTTP Client: Native fetch API
 
 Styling: Modern CSS / Modular UI Components
 
@@ -274,7 +274,7 @@ No additional backend dependencies are required.
 
 Stateless Operations: Each calculation request is treated independently. No historical operation tracking or persistent user sessions are stored on the server.
 
-Numeric Precision: Numbers use Go's standard float64 floating-point representations, suitable for standard financial and scientific calculations within standard IEEE 754 limits.
+Numeric Precision: Calculations use Go's standard float64 representation, which is appropriate for the arithmetic operations required by this assignment. Financial applications requiring exact decimal arithmetic would require a decimal or fixed-point representation.
 
 Internal Proxy Routing: Production deployments rely on Nginx to route /api/* requests to the Go backend, avoiding cross-origin resource sharing (CORS) complexities in production environments.
 
