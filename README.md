@@ -63,6 +63,8 @@ Frontend: Vitest, React Testing Library, jsdom
 Backend: Go testing package, httptest package
 
 ## Infrastructure
+Containerization: Docker, Docker Compose
+
 Web Server / Reverse Proxy: Nginx (Alpine-based)
 
 # Local Development
@@ -89,6 +91,22 @@ npm run dev
 
 cd frontend
 npm run build
+
+# Docker Execution
+
+Run the complete, containerized stack with a single command without needing local Go or Node installations.
+
+## Build and Run
+
+docker compose up --build -d
+
+Frontend UI: Accessible at http://localhost:3000
+
+Backend API: Accessible directly at http://localhost:8080 or via proxy at http://localhost:3000/api/
+
+## Stop Application
+
+docker compose down
 
 # API Documentation
 
@@ -273,6 +291,8 @@ Internal Proxy Routing: Production deployments rely on Nginx to route /api/* req
 * **Edge-Case Identification**: Identifying floating-point edge cases and division-by-zero validation paths.
 
 * **Documentation Refinement**: Structuring OpenAPI-style schemas and formatting curl execution examples.
+
+* **Architecture Exploration**: Evaluating reverse-proxy networking patterns for Docker containers.
 
 ## Prompts
 
@@ -823,4 +843,86 @@ Fix issues that are clearly within scope.
 
 Do not add new features simply to make the project larger.
 
-The final result should look like a polished, realistic junior-level production-quality take-home assignment rather than an over-engineered demo.
+
+### Final Prompt (Gemini Flash 3.6) to make the base code for the docker and optionals aditions.
+
+Before writing or modifying code:
+
+Read agents.md completely.
+
+Read memory.md completely.
+
+Read skills.md completely.
+
+Inspect the entire current repository.
+
+Your mission in this iteration is add Docker support
+
+Add Docker support for the complete application.
+
+The goal is that a reviewer should be able to run the project without manually installing Node.js or Go if Docker is available.
+
+Prefer a clean multi-stage Docker architecture.
+
+The final runtime should not contain unnecessary build tools or development dependencies.
+
+Consider the architecture carefully:
+
+Frontend:
+
+Build the Vite/React application in a Node-based build stage.
+
+Serve the resulting static assets from an appropriate lightweight production server.
+
+Backend:
+
+Build the Go application in a Go build stage.
+
+Run the resulting binary in a minimal runtime image.
+
+If the architecture supports it cleanly, use a multi-stage Dockerfile and/or Docker Compose where appropriate.
+
+Do not introduce Docker complexity that is disproportionate to this small project.
+
+Important
+
+The production frontend must communicate correctly with the production backend.
+
+Do not leave the production application dependent on the Vite development proxy.
+
+If the production architecture requires a reverse proxy, configure it explicitly and document it.
+
+If frontend and backend are exposed separately, document the expected URLs and CORS configuration.
+
+Choose the simplest production architecture that is reliable and easy for a reviewer to understand.
+
+3. Docker verification
+
+Actually build and run the containers.
+
+Do not merely create Dockerfiles without testing them.
+
+Verify:
+
+
+Docker image builds successfully.
+
+Backend starts correctly.
+
+Frontend starts correctly.
+
+Frontend can communicate with backend.
+
+Calculator operations work through the real production setup.
+
+API errors are handled correctly.
+
+Containers exit cleanly when stopped.
+
+Document the exact commands required to run the application with Docker.
+
+For example, if Docker Compose is used:
+
+docker compose up --build
+
+Document the actual commands used by the implementation rather than hypothetical commands.
